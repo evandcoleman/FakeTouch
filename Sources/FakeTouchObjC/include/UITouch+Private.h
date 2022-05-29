@@ -6,6 +6,7 @@
 //  Copyright © 2019 Watanabe Toshinori. All rights reserved.
 //
 
+#import "../KIF/IOHIDEvent+KIF.h"
 #import <UIKit/UIKit.h>
 
 @interface UITouch (Private)

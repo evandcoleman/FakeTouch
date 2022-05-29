@@ -6,6 +6,7 @@
 //  Copyright © 2019 Watanabe Toshinori. All rights reserved.
 //
 
+import FakeTouchObjC
 import UIKit
 
 extension UITouch {
