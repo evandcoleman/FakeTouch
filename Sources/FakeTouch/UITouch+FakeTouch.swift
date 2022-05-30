@@ -6,7 +6,6 @@
 //  Copyright © 2019 Watanabe Toshinori. All rights reserved.
 //
 
-import FakeTouchObjC
 import UIKit
 
 extension UITouch {
@@ -28,16 +27,13 @@ extension UITouch {
         setPhase(.began)
         _setIsFirstTouch(forView: true)
         setIsTap(true)
-        
+
         _setLocation(inWindow: location, resetPrevious: true)
         setTimestamp(ProcessInfo.processInfo.systemUptime)
 
         if responds(to: #selector(setGestureView(_:))) {
             setGestureView(view)
         }
-        
-        let event = kif_IOHIDEventWithTouches([self])
-        _setHidEvent(event)
     }
     
     // MARK: - Updating values
@@ -50,4 +46,16 @@ extension UITouch {
         setTimestamp(ProcessInfo.processInfo.systemUptime)
     }
     
+}
+
+extension UITouch {
+    @objc func setPhase(_ touchPhase: UITouch.Phase) {}
+    @objc func setTapCount(_ tapCount: Int) {}
+    @objc func setWindow(_ window: UIWindow?) {}
+    @objc func setView(_ view: UIView?) {}
+    @objc func _setLocation(inWindow location: CGPoint, resetPrevious: Bool) {}
+    @objc func _setIsFirstTouch(forView firstTouchForView: Bool) {}
+    @objc func setIsTap(_ isTap: Bool) {}
+    @objc func setTimestamp(_ timestamp: TimeInterval) {}
+    @objc func setGestureView(_ view: UIView?) {}
 }

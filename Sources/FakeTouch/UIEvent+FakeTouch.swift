@@ -32,3 +32,12 @@ extension UIEvent {
     }
     
 }
+
+extension UIEvent {
+    @objc func _add(_ touch: UITouch?, forDelayedDelivery delayed: Bool) {}
+    @objc func _clearTouches() {}
+}
+
+extension UIApplication {
+    @objc func _touchesEvent() -> UIEvent? { fatalError() }
+}
