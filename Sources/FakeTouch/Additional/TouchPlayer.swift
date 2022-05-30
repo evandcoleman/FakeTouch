@@ -6,6 +6,7 @@
 //  Copyright © 2019 Watanabe Toshinori. All rights reserved.
 //
 
+import Dynamic
 import UIKit
 
 public class TouchPlayer: NSObject {
@@ -92,9 +93,10 @@ public class TouchPlayer: NSObject {
         if let touchObject = touchObjects[touch.id] {
             // Reusing previous UITouch
 
-            touchObject.setLocation(touch.location)
-            touchObject.setPhase(touch.phase)
-            touchObject.udpateTimestamp()
+            let obj = Dynamic(touchObject)
+            obj.setLocation(touch.location)
+            obj.setPhase(touch.phase)
+            obj.udpateTimestamp()
 
             if touch.phase == .ended {
                 touchObjects[touch.id] = nil

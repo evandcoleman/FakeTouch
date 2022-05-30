@@ -6,38 +6,39 @@
 //  Copyright © 2019 Watanabe Toshinori. All rights reserved.
 //
 
+import Dynamic
 import UIKit
 
 extension UIEvent {
     
     public class func send(touches: [UITouch]) {
-        guard let event = UIApplication.shared._touchesEvent() else {
+        guard let event = Dynamic(UIApplication.shared)._touchesEvent() as UIEvent? else {
             return
         }
         
-        event._clearTouches()
+        Dynamic(event)._clearTouches()
 
         touches.forEach { (touch) in
-            event._add(touch, forDelayedDelivery: false)
+            Dynamic(event)._addTouch(touch, forDelayedDelivery: false)
         }
 
         UIApplication.shared.sendEvent(event)
         
         touches.forEach { (touch) in
             if touch.phase == .began || touch.phase == .moved {
-                touch.setPhase(.stationary)
-                touch.udpateTimestamp()
+                Dynamic(touch).setPhase(UITouch.Phase.stationary)
+                Dynamic(touch).udpateTimestamp()
             }
         }
     }
     
 }
 
-extension UIEvent {
-    @objc func _add(_ touch: UITouch?, forDelayedDelivery delayed: Bool) {}
-    @objc func _clearTouches() {}
-}
-
-extension UIApplication {
-    @objc func _touchesEvent() -> UIEvent? { fatalError() }
-}
+//extension UIEvent {
+//    @objc func _add(_ touch: UITouch?, forDelayedDelivery delayed: Bool) {}
+//    @objc func _clearTouches() {}
+//}
+//
+//extension UIApplication {
+//    @objc func _touchesEvent() -> UIEvent? { fatalError() }
+//}
